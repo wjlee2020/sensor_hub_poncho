@@ -1,4 +1,4 @@
-# SensorHub
+# SensorHub (Nerves running on Raspberry PI 3, Model B Vi. 2)
 
 ## Getting Started
 
