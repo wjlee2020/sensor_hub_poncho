@@ -47,6 +47,7 @@ defmodule SensorHub.MixProject do
       {:ring_logger, "~> 0.10.0"},
       {:toolshed, "~> 0.3.0"},
       {:circuits_i2c, "~> 0.3.8"},
+      {:sgp40, "~> 0.1.5"},
 
       # Allow Nerves.Runtime on host to support development, testing and CI.
       # See config/host.exs for usage.
