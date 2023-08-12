@@ -1,18 +1,31 @@
 defmodule Veml6030 do
   @moduledoc """
-  Documentation for `Veml6030`.
+  Top GenServer for VEML6030
   """
 
-  @doc """
-  Hello world.
+  use GenServer
+  require Logger
 
-  ## Examples
+  alias Veml6030.{Comm, Config}
 
-      iex> Veml6030.hello()
-      :world
+  def init(%{address: address, i2c_bus_name: bus_name} = args) do
+    i2c = Comm.open(bus_name)
 
-  """
-  def hello do
-    :world
+    config =
+      args
+      |> Map.take([:gain, :int_time, :shutdown, :interrupt])
+      |> Config.new()
+
+    Comm.write_config(config, i2c, address)
+    :timer.send_interval(1_000, :measure)
+
+    state = %{
+      i2c: i2c,
+      address: address,
+      config: config,
+      last_reading: :no_reading
+    }
+
+    {:ok, state}
   end
 end
