@@ -15,6 +15,11 @@ config :sensor_hub, target: Mix.target()
 
 config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
 
+config :nerves_firmware_ssh,
+  authorized_keys: [
+    File.read!(Path.join(System.user_home!(), ".ssh/id_rsa.pub"))
+  ]
+
 # Set the SOURCE_DATE_EPOCH date for reproducible builds.
 # See https://reproducible-builds.org/docs/source-date-epoch/ for more information
 
